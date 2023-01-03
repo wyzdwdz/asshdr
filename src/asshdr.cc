@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
         std::string str = CLI::FailureMessage::simple(app, e);
         str.pop_back();
         str.append(". See --help for more info.");
-        nowide::cout << "[ERROR] " << str << '\n';
+        nowide::cout << "[ERROR] " << str << std::endl;
         return "";
       });
   CLI11_PARSE(app, argc, argv);
@@ -81,20 +81,24 @@ int main(int argc, char** argv) {
     << "                                      (Default: same directory as input)\n"
     << "  -b, --brightness   <num (0-1000)>    Target brightness for recoloring\n"  
     << "                                      (Default: 203)\n"
-    << "  -h, --help                           Get help info\n\n";
+    << "  -h, --help                           Get help info\n" << std::endl;
     // clang-format on
   }
 
   if (!is_help && inputs.empty()) {
-    nowide::cout << "[ERROR] --input is required. See --help for more info.\n";
+    nowide::cout << "[ERROR] --input is required. See --help for more info."
+                 << std::endl;
+    ;
+    system("pause");
     return 0;
   }
 
   fs::path output_path = fs::u8path(output);
   if (!output.empty() && !fs::is_directory(output_path)) {
-    nowide::cout
-        << '\"' << output << '\"'
-        << " is not a legal directory path. See --help for more info.\n";
+    nowide::cout << '\"' << output << '\"'
+                 << " is not a legal directory path. See --help for more info."
+                 << std::endl;
+    system("pause");
     return 0;
   }
 
@@ -102,7 +106,7 @@ int main(int argc, char** argv) {
     fs::path input_path = fs::u8path(input);
     if (!input.empty() && !fs::is_regular_file(input_path)) {
       nowide::cout << "[ERROR] \"" << input << '\"'
-                   << " is not a file. See --help for more info.\n";
+                   << " is not a file. See --help for more info." << std::endl;
       continue;
     }
     if (!fs::is_directory(output_path)) {
@@ -114,7 +118,8 @@ int main(int argc, char** argv) {
     std::string ass_text(sstream.str());
 
     if (!is_valid_utf8(ass_text)) {
-      nowide::cout << "[ERROR] \"" << input << "\" must be UTF-8 encoded.\n";
+      nowide::cout << "[ERROR] \"" << input << "\" must be UTF-8 encoded."
+                   << std::endl;
       continue;
     }
 
@@ -122,12 +127,18 @@ int main(int argc, char** argv) {
     std::unique_ptr<char> out_text(new char[out_size]);
     asshdr::AssRecolor(ass_text.c_str(), ass_text.size(), out_text.get(),
                        out_size, brightness);
-    nowide::ofstream os(output_path.u8string() + '/' +
-                        input_path.stem().u8string() + ".hdr" +
-                        input_path.extension().u8string());
+
+    fs::path output_file_path =
+        fs::u8path(output_path.u8string() + '/' + input_path.stem().u8string() +
+                   ".hdr" + input_path.extension().u8string());
+    nowide::ofstream os(output_file_path.u8string());
     os << std::string(out_text.get(), out_size);
+    nowide::cout << "[INFO] Output file has been saved in \""
+                 << output_file_path.make_preferred().u8string() << "\""
+                 << std::endl;
   }
 
+  system("pause");
   return 0;
 }
 
