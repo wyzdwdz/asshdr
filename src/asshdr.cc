@@ -102,7 +102,7 @@ int main(int argc, char** argv) {
     if (!input.empty() && !fs::is_regular_file(input_path)) {
       nowide::cout << "[ERROR] \"" << input << '\"'
                    << " is not a file. See --help for more info.\n";
-      return 0;
+      continue;
     }
     if (!fs::is_directory(output_path)) {
       output_path = input_path.parent_path();
