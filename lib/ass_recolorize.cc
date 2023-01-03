@@ -130,6 +130,23 @@ bool AssRecolor(const char* input_str, const unsigned int& input_size,
     }
   }
 
+  std::string input_endblank;
+  for (auto it = input_string.end() - 1; it > input_string.begin(); --it) {
+    if (*it == '\n' || *it == '\r' || *it == ' ') {
+      input_endblank.insert(input_endblank.begin(), *it);
+    } else {
+      break;
+    }
+  }
+  for (auto it = output_string.end() - 1; it > output_string.begin(); --it) {
+    if (*it == '\n' || *it == '\r' || *it == ' ') {
+      output_string.pop_back();
+    } else {
+      break;
+    }
+  }
+  output_string.append(input_endblank);
+
   if (output_size < output_string.size()) {
     return false;
   }

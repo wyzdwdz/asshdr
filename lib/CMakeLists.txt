@@ -6,7 +6,7 @@ set(TARGET_SOURCES ass_recolorize.cc)
 
 set(TARGET_NAME libasshdr)
 						  
-add_library(${TARGET_NAME} SHARED)
+add_library(${TARGET_NAME} STATIC)
 
 target_sources(${TARGET_NAME} PRIVATE ${TARGET_SOURCES})
 
