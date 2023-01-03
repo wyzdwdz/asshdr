@@ -1,6 +1,6 @@
 ﻿cmake_minimum_required (VERSION 3.16)
 
-project (assfonts CXX)
+project (asshdr CXX)
 
 set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/install)
 

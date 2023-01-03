@@ -21,10 +21,10 @@ conan build .
 
 ```
 Usage:     asshdr [options...] [<files>]
-Examples:  assfonts <files>
-           assfonts -i <files>
-           assfonts -o <dir> -i <files>
-           assfonts -b <num> -o <dir> -i <files>
+Examples:  asshdr <files>
+           asshdr -i <files>
+           asshdr -o <dir> -i <files>
+           asshdr -b <num> -o <dir> -i <files>
 Options:
   -i, --input,       <files>           Input .ass files
   -o, --output       <dir>             Output directory
