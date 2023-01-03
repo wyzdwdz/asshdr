@@ -37,7 +37,7 @@ namespace fs = std::filesystem;
 bool is_valid_utf8(const std::string& str);
 
 int main(int argc, char** argv) {
-  nowide::args(argc, argv);
+  nowide::args _(argc, argv);
 
   std::vector<std::string> inputs;
   std::string output;
@@ -90,8 +90,7 @@ int main(int argc, char** argv) {
     return 0;
   }
 
-  std::error_code ec;
-  fs::path output_path = fs::absolute(output, ec);
+  fs::path output_path = fs::u8path(output);
   if (!output.empty() && !fs::is_directory(output_path)) {
     nowide::cout
         << '\"' << output << '\"'
@@ -100,7 +99,7 @@ int main(int argc, char** argv) {
   }
 
   for (const std::string& input : inputs) {
-    fs::path input_path = fs::absolute(input, ec);
+    fs::path input_path = fs::u8path(input);
     if (!input.empty() && !fs::is_regular_file(input_path)) {
       nowide::cout << "[ERROR] \"" << input << '\"'
                    << " is not a file. See --help for more info.\n";
@@ -115,8 +114,7 @@ int main(int argc, char** argv) {
     std::string ass_text(sstream.str());
 
     if (!is_valid_utf8(ass_text)) {
-      nowide::cout << "[ERROR] \"" << input
-                   << "\" must be UTF-8 encoded.\n";
+      nowide::cout << "[ERROR] \"" << input << "\" must be UTF-8 encoded.\n";
       continue;
     }
 
