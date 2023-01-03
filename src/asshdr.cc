@@ -118,7 +118,6 @@ int main(int argc, char** argv) {
     nowide::ofstream os(output_path.u8string() + '/' +
                         input_path.stem().u8string() + ".hdr" +
                         input_path.extension().u8string());
-    output_path.make_preferred().u8string();
     os << std::string(out_text.get(), out_size);
   }
 
