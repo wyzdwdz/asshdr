@@ -88,8 +88,6 @@ int main(int argc, char** argv) {
   if (!is_help && inputs.empty()) {
     nowide::cout << "[ERROR] --input is required. See --help for more info."
                  << std::endl;
-    ;
-    system("pause");
     return 0;
   }
 
@@ -98,7 +96,6 @@ int main(int argc, char** argv) {
     nowide::cout << '\"' << output << '\"'
                  << " is not a legal directory path. See --help for more info."
                  << std::endl;
-    system("pause");
     return 0;
   }
 
@@ -138,7 +135,6 @@ int main(int argc, char** argv) {
                  << std::endl;
   }
 
-  system("pause");
   return 0;
 }
 
