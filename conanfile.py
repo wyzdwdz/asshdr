@@ -25,7 +25,7 @@ class _CMake(CMake):
         self._conanfile.run(command)
 
 
-class AssfontsConan(ConanFile):
+class AsshdrConan(ConanFile):
     name = "asshdr"
     version = "0.1.0"
 
