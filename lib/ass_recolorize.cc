@@ -17,7 +17,7 @@
  *  written by wyzdwdz (https://github.com/wyzdwdz)
  */
 
-#include "ass_recolorize.h"
+#include "asshdr/ass_recolorize.h"
 
 #include <array>
 #include <cmath>
@@ -28,7 +28,7 @@
 #include <sstream>
 #include <string>
 
-#include <jpcre2.hpp>
+#include "jpcre2.hpp"
 
 using jp = jpcre2::select<char>;
 
@@ -248,13 +248,13 @@ std::array<unsigned int, 3> Recolor(const unsigned int& red,
   std::array<double, 3> rgb_linear = SrgbOetfInverse(rgb_norm);
   std::array<double, 3> xyz = SrgbToXyz(rgb_linear);
   std::array<double, 3> xyy = XyzToXyy(xyz);
-  xyy[2] = xyy[2] * brightness / 1000;
+  xyy[2] = xyy[2] * brightness / 1000.0;
   xyz = XyyToXyz(xyy);
   rgb_linear = XyzToBt2100(xyz);
   rgb_norm = Bt2100Oetf(rgb_linear);
-  res[0] = std::round(rgb_norm[0] * 255);
-  res[1] = std::round(rgb_norm[1] * 255);
-  res[2] = std::round(rgb_norm[2] * 255);
+  res[0] = std::round(rgb_norm[0] * 255.0);
+  res[1] = std::round(rgb_norm[1] * 255.0);
+  res[2] = std::round(rgb_norm[2] * 255.0);
   return res;
 }
 
@@ -342,7 +342,7 @@ std::array<double, 3> Bt2100Oetf(const std::array<double, 3>& rgb) {
     } else {
       res[i] = 1.099 * Spow(res[i], 0.45) - 0.099;
     }
-    res[i] = 100 * 2.4 * std::pow(std::max(res[i], 0.0), 2.4);
+    res[i] = 100 * std::pow(std::max(res[i], 0.0), 2.4);
     double Y_p = Spow(res[i] / 10000.0, m_1);
     res[i] = Spow((c_1 + c_2 * Y_p) / (c_3 * Y_p + 1), m_2);
   }

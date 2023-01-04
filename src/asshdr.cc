@@ -29,7 +29,7 @@
 #include <nowide/fstream.hpp>
 #include <nowide/iostream.hpp>
 
-#include "ass_recolorize.h"
+#include "asshdr/ass_recolorize.h"
 #include "ver.h"
 
 namespace fs = std::filesystem;
@@ -55,6 +55,7 @@ int main(int argc, char** argv) {
   p_opt_i->type_name("<files>");
   p_opt_o->type_name("<dir>");
   p_opt_b->type_name("<num>");
+  p_opt_b->check(CLI::Range(0, 1000));
   app.failure_message(
       [=](const CLI::App* app, const CLI::Error& e) -> std::string {
         std::string str = CLI::FailureMessage::simple(app, e);

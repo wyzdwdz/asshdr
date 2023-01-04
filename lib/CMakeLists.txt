@@ -12,8 +12,7 @@ target_sources(${TARGET_NAME} PRIVATE ${TARGET_SOURCES})
 
 target_link_libraries(${TARGET_NAME} PRIVATE ${THIRD_PARTY_LIBS})
 
-target_include_directories(${TARGET_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include
-                                                  ${THIRD_PARTY_INCLUDE_DIRS})
+target_include_directories(${TARGET_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 target_compile_options(${TARGET_NAME} PRIVATE ${COMPILE_OPTIONS})
 

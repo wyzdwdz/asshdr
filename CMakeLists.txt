@@ -6,7 +6,7 @@ set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/install)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty)
 
-configure_file(${PROJECT_SOURCE_DIR}/include/ver.h.in ${PROJECT_BINARY_DIR}/include/ver.h)
+configure_file(${PROJECT_SOURCE_DIR}/src/ver.h.in ${PROJECT_BINARY_DIR}/src/ver.h)
 
 find_package(PCRE2 REQUIRED)
 find_package(CLI11 REQUIRED)
