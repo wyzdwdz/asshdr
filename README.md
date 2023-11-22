@@ -12,8 +12,21 @@ Package Manager ---- Conan version 2.0
 
 ### How to build
 
+## Linux
+
 ```
 conan install . -b missing -s build_type=Release -c tools.system.package_manager:mode=install
+source ./build/Release/generators/conanbuild.sh
+cmake --preset conan-default
+cmake --build --preset conan-release -j
+cmake --install build --prefix install
+```
+
+## Windows
+
+```
+conan install . -b missing -s build_type=Release -c tools.system.package_manager:mode=install
+call .\build\generators\conanbuild.bat
 cmake --preset conan-default
 cmake --build --preset conan-release -j
 cmake --install build --prefix install
