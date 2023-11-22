@@ -12,7 +12,7 @@ Package Manager ---- Conan version 2.0
 
 ### How to build
 
-## Linux
+#### Linux
 
 ```
 conan install . -b missing -s build_type=Release -c tools.system.package_manager:mode=install
@@ -22,7 +22,7 @@ cmake --build --preset conan-release -j
 cmake --install build --prefix install
 ```
 
-## Windows
+#### Windows
 
 ```
 conan install . -b missing -s build_type=Release -c tools.system.package_manager:mode=install
