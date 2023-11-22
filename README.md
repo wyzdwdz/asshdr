@@ -4,7 +4,7 @@ Recolorize ASS subtitle for HDR contents.
 
 ### Build Requirements
 
-Package Manager ---- Conan version 1.56.0
+Package Manager ---- Conan version 2.0
 
 - [pcre2](https://www.pcre.org/)
 
@@ -13,8 +13,10 @@ Package Manager ---- Conan version 1.56.0
 ### How to build
 
 ```
-conan install . -b=missing -s build_type=Release -c tools.cmake.cmaketoolchain.presets:max_schema_version=2
-conan build .
+conan install . -b missing -s build_type=Release -c tools.system.package_manager:mode=install
+cmake --preset conan-default
+cmake --build --preset conan-release -j
+cmake --install build --prefix install
 ```
 
 ### How to use
