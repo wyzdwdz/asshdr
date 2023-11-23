@@ -122,7 +122,7 @@ int main(int argc, char** argv) {
     }
 
     unsigned int out_size = ass_text.size() * 2;
-    std::unique_ptr<char> out_text(new char[out_size]);
+    std::unique_ptr<char[]> out_text(new char[out_size]);
     asshdr::AssRecolor(ass_text.c_str(), ass_text.size(), out_text.get(),
                        out_size, brightness);
 
