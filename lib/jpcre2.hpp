@@ -2266,6 +2266,8 @@ struct select{
             return *this;
         }
 
+        using RegexMatch::operator=;
+
         public:
 
         ///Default constructor.
@@ -2428,7 +2430,6 @@ struct select{
         ///@param me rvalue reference to a MatchEvaluator object
         ///@return A reference to the calling MatchEvaluator object.
         ///@see MatchEvaluator(MatchEvaluator&& me)
-        using RegexMatch::operator=;
         MatchEvaluator& operator=(MatchEvaluator&& me){
             if(this == &me) return *this;
             RegexMatch::operator=(me);
